@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7220453147588290918}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381516843128920822}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 16, y: 0.125, z: 16}
   m_Children:
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4919550409318989001}
   - component: {fileID: 4919550409318989000}
   - component: {fileID: 4919550409318989003}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4919550409664578036}
   - component: {fileID: 4919550409664578039}
   - component: {fileID: 4919550409664578038}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 4919550409850973585}
   - component: {fileID: 4919550409850973584}
   - component: {fileID: 4919550409850973587}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 4919550409881774353}
   - component: {fileID: 4919550409881774352}
   - component: {fileID: 4919550409881774355}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 4919550410053008110}
   - component: {fileID: 4919550410053008105}
   - component: {fileID: 4919550410053008104}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

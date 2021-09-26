@@ -64,6 +64,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 7628535255945404658}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &7628535256134321587
 GameObject:
   m_ObjectHideFlags: 0
