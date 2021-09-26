@@ -33,6 +33,13 @@ public class Server : MonoBehaviour, INetEventListener
     {
         server.PollEvents();
     }
+
+    public void SendCreatePlayer(PlayerController playerController)
+    {
+        var model = new CreatePlayerModel { Id = playerController.Id, Position = playerController.Position };
+        SendAll(model);
+    }
+
     public void SendAll(BaseModel model)
     {
         var json = JsonConvert.SerializeObject(model);
@@ -41,15 +48,16 @@ public class Server : MonoBehaviour, INetEventListener
             clientConnection.Send(json);
         }
     }
-    public void OnConnectionRequest(ConnectionRequest request){
+    public void OnConnectionRequest(ConnectionRequest request)
+    {
         Debug.Log("OnConnectionRequest");
         CreatePeerConnection(request.AcceptIfKey(KEY));
     }
     public void OnNetworkError(IPEndPoint endPoint, SocketError socketError) => Debug.Log("OnNetworkError");
-    public void OnNetworkLatencyUpdate(NetPeer peer, int latency) {}
+    public void OnNetworkLatencyUpdate(NetPeer peer, int latency) { }
     public void OnNetworkReceive(NetPeer peer, NetPacketReader reader, DeliveryMethod deliveryMethod)
     {
-         Debug.Log("OnNetworkReceive");
+        Debug.Log("OnNetworkReceive");
         modelToObjectMapper.DeserializeToFunction(peer, reader.GetString());
     }
     public void OnNetworkReceiveUnconnected(IPEndPoint remoteEndPoint, NetPacketReader reader, UnconnectedMessageType messageType) => Debug.Log("OnNetworkReceiveUnconnected");
@@ -58,11 +66,26 @@ public class Server : MonoBehaviour, INetEventListener
         var id = clientCurrnetId++;
         var peerConnection = new PeerConnection(this, peer, id);
         peer.Tag = peerConnection;
-        
+
+        var model = new InitDataModel();
+        foreach (var clientConnection in peerConnections.Values)
+        {
+            var player = clientConnection.Player;
+            if (player != null)
+            {
+                var createPlayerModel = new CreatePlayerModel { Id = player.Id, Position = player.Position };
+                model.CreatePlayerModels.Add(createPlayerModel);
+            }
+        }
         peerConnections.Add(id, peerConnection);
+        serverController.CreatePlayer(peerConnection);
+
+        var playerId = peerConnection.PlayerId;
+        model.PlayerId = playerId;
+        peerConnection.Send(model);
     }
 
-     public void OnPeerConnected(NetPeer peer)
+    public void OnPeerConnected(NetPeer peer)
     {
         Debug.Log("OnPeerConnected");
     }

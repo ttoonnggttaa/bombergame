@@ -11,7 +11,8 @@ public class ModelToObjectMapper
 
     private Dictionary<string, Action<JObject>> CreateDeserializes() => new Dictionary<string, Action<JObject>>
     {
-        //TODO
+        [CreatePlayerModel.CLASS_NAME] = OnCreatePlayerModel,
+        [InitDataModel.CLASS_NAME] = OnInitData
     };
 
     public ModelToObjectMapper(ClientController clientController)
@@ -28,6 +29,16 @@ public class ModelToObjectMapper
             var className = value.ToString();
             Deserializes[className](jObject);
         }
+    }
+    private void OnCreatePlayerModel(JObject jObject)
+    {
+        var model = jObject.ToObject<CreatePlayerModel>();
+        clientController.OnCreatePlayer(model);
+    }
+    private void OnInitData(JObject jObject)
+    {
+        var model = jObject.ToObject<InitDataModel>();
+        clientController.OnInitData(model);
     }
 
 }
